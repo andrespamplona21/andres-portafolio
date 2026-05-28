@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Modo claro — paleta neutra estilo Vercel/Linear */
+  --bg: 250 250 249;
+  --surface: 255 255 255;
+  --fg: 23 23 23;
+  --muted: 115 115 115;
+  --subtle: 163 163 163;
+  --border: 229 229 229;
+  --accent: 23 23 23;
+}
+
+.dark {
+  /* Modo oscuro — negro suave, no #000 puro */
+  --bg: 10 10 10;
+  --surface: 23 23 23;
+  --fg: 250 250 250;
+  --muted: 163 163 163;
+  --subtle: 115 115 115;
+  --border: 38 38 38;
+  --accent: 250 250 250;
+}
+
+* {
+  border-color: rgb(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgb(var(--fg));
+  color: rgb(var(--bg));
+}
+
+/* ---- Animaciones estilo Uiverse para botones ---- */
+
+/* Barrido de brillo: una franja de luz cruza el botón al hacer hover */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgb(var(--bg) / 0.55) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.btn-shine:hover::after {
+  transform: translateX(120%);
+}
+
+/* Borde con gradiente que gira — para un CTA destacado */
+@property --btn-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes btn-rotate {
+  to { --btn-angle: 360deg; }
+}
+.btn-gradient-border {
+  position: relative;
+  border-radius: 0.5rem;
+  background: rgb(var(--surface));
+  isolation: isolate;
+}
+.btn-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--btn-angle),
+    transparent 0deg,
+    rgb(var(--fg)) 90deg,
+    transparent 200deg,
+    rgb(var(--fg) / 0.4) 320deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: btn-rotate 4s linear infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-shine::after { transition: none; }
+  .btn-gradient-border::before { animation: none; }
+}
+
+/* Grid de fondo sutil opcional */
+.bg-grid {
+  background-image:
+    linear-gradient(rgb(var(--border) / 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--border) / 0.4) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, #000 30%, transparent 80%);
+}
+
+/* Scroll bar discreto */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 10px;
+  border: 2px solid rgb(var(--bg));
+}
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--subtle)); }
+
+/* Para que no haya FOUC del tema */
+html.dark { color-scheme: dark; }
+
+/* Prose para posts en markdown */
+.prose-custom {
+  max-width: 65ch;
+  line-height: 1.75;
+  color: rgb(var(--fg));
+}
+.prose-custom h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 2.5rem 0 1rem;
+  letter-spacing: -0.02em;
+}
+.prose-custom h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 2rem 0 0.75rem;
+}
+.prose-custom p {
+  margin: 0 0 1.25rem;
+  color: rgb(var(--fg));
+}
+.prose-custom a {
+  color: rgb(var(--fg));
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgb(var(--border));
+  transition: text-decoration-color 0.2s;
+}
+.prose-custom a:hover {
+  text-decoration-color: rgb(var(--fg));
+}
+.prose-custom code {
+  background: rgb(var(--surface));
+  border: 1px solid rgb(var(--border));
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.875em;
+  font-family: var(--font-mono);
+}
+.prose-custom pre {
+  background: rgb(var(--surface));
+  border: 1px solid rgb(var(--border));
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  margin: 1.5rem 0;
+}
+.prose-custom pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+.prose-custom ul, .prose-custom ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.5rem;
+}
+.prose-custom li {
+  margin: 0.25rem 0;
+}
+.prose-custom blockquote {
+  border-left: 2px solid rgb(var(--fg));
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  color: rgb(var(--muted));
+  font-style: italic;
+}
