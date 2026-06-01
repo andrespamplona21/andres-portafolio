@@ -1,101 +1,123 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowUpRight, Github } from "lucide-react";
-import { motion } from "motion/react";
+import { ArrowUpRight, Github, Smartphone } from "lucide-react";
 import { Metric } from "@/components/metric";
+import { BrowserFrame } from "@/components/browser-frame";
 import type { Project } from "@/data/projects";
+import type { Locale } from "@/i18n/config";
 
-const statusLabel: Record<Project["status"], string> = {
-  live: "en vivo",
-  wip: "en proceso",
-  archived: "archivado",
-};
+type StatusLabels = Record<Project["status"], string>;
 
 const statusDot: Record<Project["status"], string> = {
-  live: "bg-emerald-500",
-  wip: "bg-amber-500",
-  archived: "bg-neutral-400",
+  live: "bg-accent",
+  wip: "bg-warning",
+  archived: "bg-subtle",
 };
 
-export function ProjectCard({ project }: { project: Project }) {
-  return (
-    <motion.article
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface transition-colors hover:border-fg/30 hover:shadow-lg hover:shadow-fg/5"
-    >
-      {project.image && (
-        <div className="relative aspect-[16/10] overflow-hidden border-b border-border">
-          <Image
-            src={project.image}
-            alt={`Vista previa de ${project.title}`}
-            fill
-            sizes="(max-width: 640px) 100vw, 400px"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        </div>
-      )}
+export function ProjectCard({
+  project,
+  lang,
+  statusLabels,
+  index,
+}: {
+  project: Project;
+  lang: Locale;
+  statusLabels: StatusLabels;
+  index?: number;
+}) {
+  const title = project.title[lang];
+  const detailHref = `/${lang}/trabajo/${project.slug}`;
 
-      <div className="flex flex-1 flex-col p-5">
-      <div className="mb-4 flex items-center justify-between text-xs text-muted">
-        <span className="flex items-center gap-1.5">
-          <span className={`h-1.5 w-1.5 rounded-full ${statusDot[project.status]}`} />
-          {statusLabel[project.status]}
-        </span>
-        <span className="font-mono">{project.year}</span>
+  const preview = project.image ? (
+    <BrowserFrame
+      src={project.image}
+      alt={`${title}`}
+      url={project.links.demo}
+    />
+  ) : (
+    <div className="frame flex aspect-[16/10] flex-col items-center justify-center gap-3 border border-border text-muted">
+      <Smartphone className="h-8 w-8 opacity-50" strokeWidth={1.5} />
+      <span className="font-mono text-[11px] uppercase tracking-widest">
+        {statusLabels[project.status]}
+      </span>
+    </div>
+  );
+
+  return (
+    <article className="group relative flex h-full flex-col">
+      <div className="transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1">
+        {preview}
       </div>
 
-      <h3 className="mb-2 text-base font-medium tracking-tight">
-        {project.title}
-      </h3>
-      <p className="mb-4 flex-1 text-sm leading-relaxed text-muted">
-        {project.description}
-      </p>
+      <div className="mt-5 flex flex-1 flex-col">
+        <div className="mb-2 flex items-center justify-between font-mono text-[11px] text-muted">
+          <span className="flex items-center gap-1.5">
+            {typeof index === "number" && (
+              <span className="tabular-nums text-muted">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            )}
+            <span className={`h-1.5 w-1.5 rounded-full ${statusDot[project.status]}`} />
+            {statusLabels[project.status]}
+          </span>
+          <span className="tabular-nums">{project.year}</span>
+        </div>
 
-      {project.metrics && project.metrics.length > 0 && (
-        <div className="mb-4 grid grid-cols-3 gap-2 border-y border-border py-3">
-          {project.metrics.map((m) => (
-            <Metric key={m.label} value={m.value} label={m.label} />
+        {/* El título es el único enlace de la tarjeta; cubre toda el área con after:inset-0 */}
+        <h3 className="text-lg font-medium tracking-tight transition-colors group-hover:text-accent-strong">
+          <Link href={detailHref} className="after:absolute after:inset-0">
+            {title}
+          </Link>
+        </h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+          {project.description[lang]}
+        </p>
+
+        {project.metrics && project.metrics.length > 0 && (
+          <div className="mt-4 grid grid-cols-3 gap-2 border-t border-border pt-4">
+            {project.metrics.map((m) => (
+              <Metric key={m.label[lang]} value={m.value} label={m.label[lang]} />
+            ))}
+          </div>
+        )}
+
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {project.tags.map((t) => (
+            <span
+              key={t}
+              className="rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted"
+            >
+              {t}
+            </span>
           ))}
         </div>
-      )}
 
-      <div className="mb-4 flex flex-wrap gap-1.5">
-        {project.tags.map((t) => (
-          <span
-            key={t}
-            className="rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted"
-          >
-            {t}
-          </span>
-        ))}
-      </div>
-
-      <div className="flex gap-3 text-xs">
-        {project.links.demo && (
-          <Link
-            href={project.links.demo}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1 underline-offset-4 hover:underline"
-          >
-            demo <ArrowUpRight className="h-3 w-3" />
-          </Link>
-        )}
-        {project.links.repo && (
-          <Link
-            href={project.links.repo}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1 text-muted underline-offset-4 hover:text-fg hover:underline"
-          >
-            <Github className="h-3 w-3" /> código
-          </Link>
+        {(project.links.demo || project.links.repo) && (
+          <div className="relative z-10 mt-4 flex gap-4 text-xs">
+            {project.links.demo && (
+              <Link
+                href={project.links.demo}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 py-1 text-accent-strong underline-offset-4 hover:underline"
+              >
+                demo <ArrowUpRight className="h-3 w-3" />
+              </Link>
+            )}
+            {project.links.repo && (
+              <Link
+                href={project.links.repo}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 py-1 text-muted underline-offset-4 hover:text-fg hover:underline"
+              >
+                <Github className="h-3 w-3" /> código
+              </Link>
+            )}
+          </div>
         )}
       </div>
-      </div>
-    </motion.article>
+    </article>
   );
 }

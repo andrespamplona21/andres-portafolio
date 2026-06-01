@@ -1,0 +1,170 @@
+import type { Dictionary } from "./es";
+
+export const en: Dictionary = {
+  meta: {
+    home: {
+      title: "Andres Pamplona — Software developer",
+      description:
+        "Andres Pamplona's portfolio. I build fast web interfaces and clean APIs with Astro, Next.js, Supabase, and Tailwind.",
+    },
+    work: { title: "Work" },
+    about: { title: "About" },
+    stack: { title: "Stack" },
+    blog: { title: "Blog" },
+    contact: { title: "Contact" },
+  },
+  nav: {
+    inicio: "home",
+    trabajo: "work",
+    sobreMi: "about",
+    stack: "stack",
+    blog: "blog",
+    contacto: "contact",
+  },
+  langSwitch: { aria: "Change language", es: "Español", en: "English" },
+  footer: { madeWith: "Built with Next.js, Tailwind, and coffee." },
+  home: {
+    status: "available for projects",
+    name: "Andres Pamplona,",
+    h1Accent: "software",
+    h1Post: " developer.",
+    intro:
+      "I build fast web interfaces and clean APIs. I obsess over detail, load times, and making things feel good to use. Currently working with Astro, Next.js, Supabase, and anything with good defaults.",
+    work: { title: "Selected work", viewAll: "view all →" },
+    quote: {
+      pre: "Simple, done well, wins ",
+      accent: "almost every time",
+      post: ".",
+      attribution: "personal philosophy",
+    },
+    cta: {
+      title: "Have a project in mind?",
+      body: "I'm available for new projects. Tell me what you need and I'll get back to you within 24 hours.",
+      button: "Let's talk",
+    },
+    cv: "Résumé",
+    viewWork: "View work",
+  },
+  work: {
+    eyebrow: "Work",
+    titlePre: "Things I've ",
+    titleAccent: "built",
+    titlePost: ".",
+    intro:
+      "A mix of client projects, templates, and personal experiments. Most recent on top.",
+  },
+  about: {
+    eyebrow: "About",
+    titlePre: "Software engineer, ",
+    titleAccent: "full-stack developer",
+    titlePost: ".",
+    bio: "I studied Software Engineering at UTEG and have been building for real clients ever since. Over the past year I shipped sites for medical aesthetics, real estate, and finance, both at an agency and on my own. I move between the frontend (Astro, Next.js, Tailwind, Motion) and the backend (REST APIs with Node and TypeScript), and I also handle what actually makes a site work: SEO, analytics, and automation.",
+    sections: {
+      experience: "Experience",
+      education: "Education",
+      languages: "Languages",
+      resume: "Résumé",
+    },
+    experience: [
+      {
+        role: "Web developer",
+        org: "Digital marketing agency",
+        place: "Guadalajara · remote",
+        period: "2025 — present",
+        points: [
+          "Built and shipped sites for clients in medical aesthetics, real estate, finance, and legal (renascimedspa.com, senordelascasas.com, brokerlenders.com, carinjuryclinics.com).",
+          "Frontends with Astro, Tailwind, and Motion, using mobile-first responsive design.",
+          "REST APIs with Node.js and TypeScript: automated email delivery, state-level rates, and Utah home pricing.",
+          "SEO (Google and Bing), Google Analytics, Google Places API, and automation with GoHighLevel, Make, and Zapier.",
+        ],
+      },
+      {
+        role: "Freelance web developer",
+        org: "Independent",
+        place: "remote",
+        period: "2024 — present",
+        points: [
+          "End-to-end sites and landing pages: design, frontend, and production deployment.",
+          "Version control with Git and GitHub, deployed to Vercel from the terminal.",
+          "Work organized with Scrum and Trello.",
+        ],
+      },
+    ],
+    education: {
+      degree: "B.S. in Software Engineering",
+      school: "Universidad Tecnológica de Guadalajara (UTEG)",
+      period: "2019 — 2023",
+    },
+    languages: {
+      spanish: "Spanish",
+      spanishLevel: "native",
+      english: "English",
+      englishLevel: "B2 / C1",
+    },
+    resume: {
+      note: "Available in Spanish and English. Open it in a new tab or download the PDF.",
+    },
+  },
+  stack: {
+    eyebrow: "Stack",
+    titlePre: "Tools I ",
+    titleAccent: "use",
+    titlePost: ".",
+    intro:
+      "Not a logo wall to pad a résumé: just what I touch often. Each one has a short note on how I use it.",
+    levels: { daily: "daily", comfortable: "comfortable", exploring: "exploring" },
+  },
+  blog: {
+    eyebrow: "Blog",
+    titlePre: "What I'm ",
+    titleAccent: "learning",
+    titlePost: ".",
+    intro:
+      "Short notes, not essays. Things I figured out, broke, or want to remember six months from now.",
+    empty: "No posts yet.",
+    min: "min",
+  },
+  post: { back: "back to blog", readingSuffix: "min read" },
+  contact: {
+    eyebrow: "Contact",
+    titlePre: "Let's talk about ",
+    titleAccent: "your project",
+    titlePost: ".",
+    intro:
+      "I reply within 24 hours. For freelance work, I'll ask for quick context on the project, budget, and deadline. If it's just curiosity, that's fine too.",
+    form: {
+      name: "Name",
+      namePh: "Your name",
+      email: "Email",
+      emailPh: "you@email.com",
+      message: "Message",
+      messagePh: "Tell me what you have in mind...",
+      send: "Send",
+      sending: "Sending...",
+      sent: "Sent",
+      okMsg: "Thanks, I'll get back to you soon.",
+      errMsg: "Something went wrong.",
+    },
+    aside: {
+      emailLabel: "Email",
+      tzLabel: "Time zone",
+      tzValue: "Guadalajara, Mexico (GMT-6)",
+    },
+  },
+  project: { status: { live: "live", wip: "in progress", archived: "archived" } },
+  projectDetail: {
+    backToWork: "work",
+    overview: "Overview",
+    purpose: "What it's for",
+    built: "What I built",
+    stack: "Stack",
+    year: "Year",
+    status: "Status",
+    visit: "visit live site",
+    gallery: "Screenshots",
+    fullPage: "full page",
+    inDevelopment: "Project in development, no public demo yet.",
+    next: "Next project",
+  },
+  cv: { open: "open", download: "download" },
+};

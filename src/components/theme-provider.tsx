@@ -7,6 +7,7 @@ import {
   useState,
   useCallback,
 } from "react";
+import { MotionConfig } from "motion/react";
 
 type Theme = "light" | "dark";
 
@@ -42,9 +43,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Para evitar el parpadeo de hidratación ocultamos hasta montar.
   return (
     <ThemeContext.Provider value={{ theme, toggle }}>
-      <div style={mounted ? undefined : { visibility: "hidden" }}>
-        {children}
-      </div>
+      <MotionConfig reducedMotion="user">
+        <div style={mounted ? undefined : { visibility: "hidden" }}>
+          {children}
+        </div>
+      </MotionConfig>
     </ThemeContext.Provider>
   );
 }

@@ -3,38 +3,54 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getAllPosts, getPost } from "@/lib/blog";
 import { Reveal } from "@/components/reveal";
+import { locales, isLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/get-dictionary";
 
-export async function generateStaticParams() {
-  return getAllPosts().map((p) => ({ slug: p.slug }));
+export function generateStaticParams() {
+  return locales.flatMap((lang) =>
+    getAllPosts(lang).map((p) => ({ lang, slug: p.slug }))
+  );
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const post = await getPost(slug);
-  return { title: post?.title ?? "Post" };
+  const { lang, slug } = await params;
+  const locale = isLocale(lang) ? lang : "es";
+  const post = await getPost(locale, slug);
+  return {
+    title: post?.title ?? "Post",
+    description: post?.excerpt,
+    alternates: {
+      canonical: `/${locale}/blog/${slug}`,
+      languages: { es: `/es/blog/${slug}`, en: `/en/blog/${slug}` },
+    },
+  };
 }
 
 export default async function PostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const post = await getPost(slug);
+  const { lang, slug } = await params;
+  if (!isLocale(lang)) notFound();
+  const dict = getDictionary(lang);
+  const post = await getPost(lang, slug);
   if (!post) notFound();
+
+  const dateLocale = lang === "es" ? "es-MX" : "en-US";
 
   return (
     <article className="space-y-8">
       <Reveal>
         <Link
-          href="/blog"
+          href={`/${lang}/blog`}
           className="inline-flex items-center gap-1 text-xs text-muted hover:text-fg"
         >
-          <ArrowLeft className="h-3 w-3" /> volver al blog
+          <ArrowLeft className="h-3 w-3" /> {dict.post.back}
         </Link>
       </Reveal>
 
@@ -45,14 +61,16 @@ export default async function PostPage({
           </h1>
           <div className="mt-3 flex gap-3 text-xs text-muted">
             <time>
-              {new Date(post.date).toLocaleDateString("es-MX", {
+              {new Date(post.date).toLocaleDateString(dateLocale, {
                 year: "numeric",
                 month: "long",
                 day: "2-digit",
               })}
             </time>
             <span>·</span>
-            <span>{post.readingTime} min de lectura</span>
+            <span>
+              {post.readingTime} {dict.post.readingSuffix}
+            </span>
           </div>
         </header>
       </Reveal>

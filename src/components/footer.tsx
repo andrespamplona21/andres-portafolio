@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
+import type { Dictionary } from "@/i18n/dictionaries/es";
 
-export function Footer() {
+export function Footer({ dict }: { dict: Dictionary }) {
   return (
     <footer className="mx-auto w-full max-w-3xl border-t border-border/60 px-6 py-10">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-muted">
-          © {new Date().getFullYear()} Andres Pamplona. Hecho con Next.js, Tailwind y café.
+          © {new Date().getFullYear()} Andres Pamplona. {dict.footer.madeWith}
         </p>
         <div className="flex gap-1">
           <Link

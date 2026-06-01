@@ -3,17 +3,15 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 
-type Variant = "primary" | "ghost" | "gradient";
+type Variant = "primary" | "ghost" | "inverse";
 
 const styles: Record<Variant, string> = {
-  // primary lleva el barrido de brillo (.btn-shine)
-  primary:
-    "btn-shine bg-fg text-bg hover:opacity-90",
-  ghost:
-    "border border-border bg-surface hover:bg-bg",
-  // gradient lleva el borde con gradiente animado (.btn-gradient-border)
-  gradient:
-    "btn-gradient-border text-fg hover:bg-bg",
+  // primary: relleno bermellón con barrido de brillo (.btn-shine)
+  primary: "btn-shine bg-accent text-accent-fg",
+  // ghost: contorno discreto, el borde vira a bermellón al hover
+  ghost: "border border-border bg-surface hover:border-accent/50 hover:text-fg",
+  // inverse: para usar sobre un panel de color (papel sobre bermellón)
+  inverse: "btn-shine bg-accent-fg text-accent",
 };
 
 const spring = { type: "spring" as const, stiffness: 400, damping: 22 };
@@ -35,7 +33,7 @@ export function MotionButton({
   external?: boolean;
   download?: boolean;
 }) {
-  const className = `group inline-flex items-center gap-1.5 rounded-md px-4 py-2 text-sm transition-colors ${styles[variant]}`;
+  const className = `group inline-flex items-center gap-1.5 rounded-md px-4 py-2 text-sm font-medium transition-colors ${styles[variant]}`;
 
   const content = (
     <motion.span

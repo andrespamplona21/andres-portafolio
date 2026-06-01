@@ -1,0 +1,170 @@
+export const es = {
+  meta: {
+    home: {
+      title: "Andres Pamplona — Desarrollador de software",
+      description:
+        "Portafolio de Andres Pamplona. Construyo interfaces web rápidas y APIs limpias con Astro, Next.js, Supabase y Tailwind.",
+    },
+    work: { title: "Trabajo" },
+    about: { title: "Sobre mí" },
+    stack: { title: "Stack" },
+    blog: { title: "Blog" },
+    contact: { title: "Contacto" },
+  },
+  nav: {
+    inicio: "inicio",
+    trabajo: "trabajo",
+    sobreMi: "sobre mí",
+    stack: "stack",
+    blog: "blog",
+    contacto: "contacto",
+  },
+  langSwitch: { aria: "Cambiar idioma", es: "Español", en: "English" },
+  footer: { madeWith: "Hecho con Next.js, Tailwind y café." },
+  home: {
+    status: "disponible para proyectos",
+    name: "Andres Pamplona,",
+    h1Accent: "desarrollador",
+    h1Post: " de software.",
+    intro:
+      "Construyo interfaces web rápidas y APIs limpias. Me obsesiona el detalle, los tiempos de carga y que las cosas se sientan bien al usarlas. Actualmente con Astro, Next.js, Supabase y todo lo que tenga buenos defaults.",
+    work: { title: "Trabajo destacado", viewAll: "ver todo →" },
+    quote: {
+      pre: "Lo simple, bien hecho, gana ",
+      accent: "casi siempre",
+      post: ".",
+      attribution: "filosofía personal",
+    },
+    cta: {
+      title: "¿Tienes un proyecto en mente?",
+      body: "Estoy disponible para nuevos proyectos. Cuéntame qué necesitas y te respondo en menos de 24 horas.",
+      button: "Hablemos",
+    },
+    cv: "CV",
+    viewWork: "Ver trabajo",
+  },
+  work: {
+    eyebrow: "Trabajo",
+    titlePre: "Cosas que ",
+    titleAccent: "he construido",
+    titlePost: ".",
+    intro:
+      "Una mezcla de proyectos de cliente, plantillas y experimentos personales. Los más recientes arriba.",
+  },
+  about: {
+    eyebrow: "Sobre mí",
+    titlePre: "Ingeniero en software, ",
+    titleAccent: "desarrollador full-stack",
+    titlePost: ".",
+    bio: "Estudié Ingeniería en Desarrollo de Software en la UTEG y desde entonces construyo para clientes reales. En el último año lancé sitios de estética médica, bienes raíces y finanzas, tanto en una agencia como por mi cuenta. Me muevo entre el frontend (Astro, Next.js, Tailwind, Motion) y el backend (APIs REST con Node y TypeScript), y me encargo también de lo que hace que un sitio funcione de verdad: SEO, analítica y automatización.",
+    sections: {
+      experience: "Experiencia",
+      education: "Educación",
+      languages: "Idiomas",
+      resume: "Curriculum",
+    },
+    experience: [
+      {
+        role: "Desarrollador web",
+        org: "Agencia de marketing digital",
+        place: "Guadalajara · remoto",
+        period: "2025 — presente",
+        points: [
+          "Desarrollé y lancé sitios para clientes de estética médica, bienes raíces, finanzas y legal (renascimedspa.com, senordelascasas.com, brokerlenders.com, carinjuryclinics.com).",
+          "Frontends con Astro, Tailwind y Motion, con diseño responsive mobile-first.",
+          "APIs REST con Node.js y TypeScript: envío automatizado de correos, tasas por estado y precios de vivienda en Utah.",
+          "SEO (Google y Bing), Google Analytics, Google Places API y automatización con GoHighLevel, Make y Zapier.",
+        ],
+      },
+      {
+        role: "Desarrollador web freelance",
+        org: "Independiente",
+        place: "remoto",
+        period: "2024 — presente",
+        points: [
+          "Sitios y landing pages de extremo a extremo: diseño, frontend e implementación en producción.",
+          "Control de versiones con Git y GitHub, deploy en Vercel desde la terminal.",
+          "Organización del trabajo con Scrum y Trello.",
+        ],
+      },
+    ],
+    education: {
+      degree: "Ingeniería en Desarrollo de Software",
+      school: "Universidad Tecnológica de Guadalajara (UTEG)",
+      period: "2019 — 2023",
+    },
+    languages: {
+      spanish: "Español",
+      spanishLevel: "nativo",
+      english: "Inglés",
+      englishLevel: "B2 / C1",
+    },
+    resume: {
+      note: "Disponible en español e inglés. Ábrelo en una pestaña nueva o descárgalo en PDF.",
+    },
+  },
+  stack: {
+    eyebrow: "Stack",
+    titlePre: "Herramientas que ",
+    titleAccent: "uso",
+    titlePost: ".",
+    intro:
+      "No es una lista de logos por inflar el CV: solo lo que toco con frecuencia. Cada cosa tiene una nota corta de cómo la uso.",
+    levels: { daily: "diario", comfortable: "cómodo", exploring: "explorando" },
+  },
+  blog: {
+    eyebrow: "Blog",
+    titlePre: "Lo que ",
+    titleAccent: "estoy aprendiendo",
+    titlePost: ".",
+    intro:
+      "Notas cortas, no ensayos. Cosas que descubrí, fallé, o quiero recordar para mí en seis meses.",
+    empty: "Aún no hay posts.",
+    min: "min",
+  },
+  post: { back: "volver al blog", readingSuffix: "min de lectura" },
+  contact: {
+    eyebrow: "Contacto",
+    titlePre: "Hablemos de ",
+    titleAccent: "tu proyecto",
+    titlePost: ".",
+    intro:
+      "Respondo en menos de 24 horas. Si es un freelance, te pido contexto rápido del proyecto, presupuesto y deadline. Si es por curiosidad, también está bien.",
+    form: {
+      name: "Nombre",
+      namePh: "Cómo te llamas",
+      email: "Email",
+      emailPh: "tu@correo.com",
+      message: "Mensaje",
+      messagePh: "Cuéntame qué tienes en mente...",
+      send: "Enviar",
+      sending: "Enviando...",
+      sent: "Enviado",
+      okMsg: "Gracias, te contesto pronto.",
+      errMsg: "Algo salió mal.",
+    },
+    aside: {
+      emailLabel: "Email",
+      tzLabel: "Zona horaria",
+      tzValue: "Guadalajara, México (GMT-6)",
+    },
+  },
+  project: { status: { live: "en vivo", wip: "en proceso", archived: "archivado" } },
+  projectDetail: {
+    backToWork: "trabajo",
+    overview: "Resumen",
+    purpose: "Para qué sirve",
+    built: "Qué construí",
+    stack: "Stack",
+    year: "Año",
+    status: "Estado",
+    visit: "ver sitio en vivo",
+    gallery: "Capturas",
+    fullPage: "página completa",
+    inDevelopment: "Proyecto en desarrollo, todavía sin demo pública.",
+    next: "Siguiente proyecto",
+  },
+  cv: { open: "abrir", download: "descargar" },
+};
+
+export type Dictionary = typeof es;
